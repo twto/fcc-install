@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 sudo apt-get update
-sudo apt-get -y install castxml gfortran g++ curl cmake git ipython
+sudo apt-get -y install castxml gfortran g++ curl cmake git python python-dev ipython
 sudo apt-get -y install libhepmc-dev libfastjet-dev libfastjettools-dev libsiscone-dev libsiscone-spherical-dev libfastjetplugins-dev
 
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && sudo -H python get-pip.py
