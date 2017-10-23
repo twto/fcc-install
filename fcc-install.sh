@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
 sudo apt-get update
-sudo apt-get -y install gccxml gfortran curl cmake git ipython
+sudo apt-get -y install castxml gfortran g++ curl cmake git ipython
 sudo apt-get -y install libhepmc-dev libfastjet-dev libfastjettools-dev libsiscone-dev libsiscone-spherical-dev libfastjetplugins-dev
-#sudo apt-get -y install libpythia8-dev  
 
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && sudo -H python get-pip.py
 sudo -H pip install pyyaml
@@ -11,18 +10,12 @@ sudo -H pip install numpy
 sudo -H pip install scipy
 sudo -H pip install dill
 
-
-
 mkdir FCC
 export FCC=${PWD}/FCC
 
 export FCCSW=/fccsw
 sudo mkdir -p $FCCSW
 sudo chown $USER:$USER $FCCSW
-
-#cd $FCC
-#wget https://root.cern.ch/download/root_v6.10.02.Linux-ubuntu16-x86_64-gcc5.4.tar.gz
-#tar zxvf root_v6.10.02.Linux-ubuntu16-x86_64-gcc5.4.tar.gz -C $FCCSW && rm root_v6.10.02.Linux-ubuntu16-x86_64-gcc5.4.tar.gz
 
 cd $FCC
 wget https://root.cern.ch/download/root_v6.10.08.Linux-ubuntu16-x86_64-gcc5.4.tar.gz
@@ -55,18 +48,6 @@ curl https://raw.githubusercontent.com/HEP-FCC/fcc-spi/master/init_fcc_stack.sh 
 source $FCCSW/setup.sh
 
 
-
-
-#cd $FCC
-#wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8226.tgz
-#tar zxvf pythia8226.tgz && rm pythia8226.tgz
-#cd pythia8226
-#./configure --prefix=$PYTHIA8_DIR --with-hepmc2=$HEPMC_PREFIX --enable-shared
-#sudo make -j 4 install
-#sudo mkdir -p $PYTHIA8DATA
-#sudo cp share/Pythia8/xmldoc/* $PYTHIA8DATA
-
-
 cd $FCC
 wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8230.tgz
 tar zxvf pythia8230.tgz && rm pythia8230.tgz
@@ -75,8 +56,6 @@ cd pythia8230
 sudo make -j 4 install
 sudo mkdir -p $PYTHIA8DATA
 sudo cp share/Pythia8/xmldoc/* $PYTHIA8DATA
-
-
 
 cd $FCC/dag/build
 cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/ ..
@@ -90,12 +69,9 @@ cd $FCC/fcc-edm/build
 cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/ ..
 make -j4 install
 
-
 cd $FCC/fcc-physics/build
 cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/ ..
 make -j4 install
-
-
 
 
 # source /fccsw/setup.sh
