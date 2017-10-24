@@ -27,9 +27,14 @@ git clone https://github.com/HEP-FCC/dag
 git clone https://github.com/HEP-FCC/fcc-edm
 git clone https://github.com/HEP-FCC/fcc-physics
 
-
-cd $FCC 
+cd $FCC
 mkdir podio/build; mkdir fcc-edm/build; mkdir fcc-physics/build; mkdir dag/build
+
+sudo git clone https://github.com/HEP-FCC/heppy.git $FCCSW/heppy/
+sudo cp $FCCSW/heppy/scripts/*.py $FCCSW/heppy/bin/
+sudo cp $FCCSW/heppy/scripts/heppy $FCCSW/heppy/bin/
+sudo chmod +x $FCCSW/heppy/bin/*.py
+sudo chmod +x $FCCSW/heppy/bin/heppy
 
 echo export PYTHIA8_DIR=/usr/lib/ >> $FCCSW/setup.sh
 echo export PYTHIA8DATA=/usr/share/pythia8-data/xmldoc/ >> $FCCSW/setup.sh
@@ -41,12 +46,15 @@ echo export FCCEDM=$FCCSW >> $FCCSW/setup.sh
 echo export PODIO=$FCCSW >> $FCCSW/setup.sh
 echo export FCCPHYSICS=$FCCSW >> $FCCSW/setup.sh
 
+echo export HEPPY=$FCCSW/heppy >> $FCCSW/setup.sh
+echo export PATH=$FCCSW/heppy/bin:$PATH >> $FCCSW/setup.sh
+echo export PYTHONPATH=$FCCSW/heppy/..:$PYTHONPATH >> $FCCSW/setup.sh
+
 echo source $FCCSW/root/bin/thisroot.sh >> $FCCSW/setup.sh
 echo source $FCCSW/init_fcc_stack.sh >> $FCCSW/setup.sh
 
 curl https://raw.githubusercontent.com/HEP-FCC/fcc-spi/master/init_fcc_stack.sh -o $FCCSW/init_fcc_stack.sh
 source $FCCSW/setup.sh
-
 
 cd $FCC
 wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8230.tgz
@@ -75,9 +83,6 @@ make -j4 install
 
 
 # source /fccsw/setup.sh
-# git clone https://github.com/HEP-FCC/heppy.git
-# cd heppy/
-# source ./init.sh
 # wget https://raw.githubusercontent.com/HEP-FCC/heppy/master/test/analysis_ee_ZH_cfg.py
 # fcc-pythia8-generate /fccsw/share/ee_ZH_Zmumu_Hbb.txt
 # heppy -i analysis_ee_ZH_cfg.py -e 0
