@@ -1,6 +1,6 @@
 # fcc-install
 
-source /fccsw/setup.sh
+``source /fccsw/setup.sh``
 
 tested with: 
 * ubuntu-16.04.3-desktop-amd64
