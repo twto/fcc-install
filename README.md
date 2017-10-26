@@ -1,6 +1,6 @@
 # fcc-install
 
-``source /fccsw/setup.sh``
+`source /fccsw/setup.sh`
 
 tested with: 
 * ubuntu-16.04.3-desktop-amd64
@@ -16,3 +16,11 @@ tested with:
 * fcc-edm
 * fcc-physics
 * heppy
+
+# example
+```shell
+source /fccsw/setup.sh
+wget https://raw.githubusercontent.com/HEP-FCC/heppy/master/test/analysis_ee_ZH_cfg.py
+fcc-pythia8-generate /fccsw/fcc-physics/share/ee_ZH_Zmumu_Hbb.txt
+heppy -i analysis_ee_ZH_cfg.py -e 0
+```
