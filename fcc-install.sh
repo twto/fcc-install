@@ -5,7 +5,7 @@ sudo apt-get -y install castxml gfortran g++ curl cmake git python python-dev ip
 sudo apt-get -y install libhepmc-dev libfastjet-dev libfastjettools-dev libsiscone-dev libsiscone-spherical-dev libfastjetplugins-dev
 sudo apt-get -y install libopenblas-base libopenblas-dev
 
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && sudo -H python get-pip.py
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && sudo -H python get-pip.py && rm get-pip.py
 sudo -H pip install pyyaml
 sudo -H pip install numpy
 sudo -H pip install scipy
@@ -43,11 +43,11 @@ echo export HEPMC_PREFIX=/usr/lib/ >> $FCCSW/setup.sh
 echo export PYTHIA8_INCLUDE_DIR=/usr/include/Pythia8 >> $FCCSW/setup.sh
 echo export PYTHIA8_LIBRARY=/usr/lib/x86_64-linux-gnu >> $FCCSW/setup.sh
 
-echo export FCCEDM=$FCCSW >> $FCCSW/setup.sh
-echo export PODIO=$FCCSW >> $FCCSW/setup.sh
-echo export FCCPHYSICS=$FCCSW >> $FCCSW/setup.sh
-
-echo export HEPPY=$FCCSW/heppy >> $FCCSW/setup.sh
+echo export FCCEDM=$FCCSW/fcc-edm/ >> $FCCSW/setup.sh
+echo export PODIO=$FCCSW/podio/ >> $FCCSW/setup.sh
+echo export FCCPHYSICS=$FCCSW/fcc-physics/ >> $FCCSW/setup.sh
+echo export FCCDAG=$FCCSW/dag/
+echo export HEPPY=$FCCSW/heppy/ >> $FCCSW/setup.sh
 echo export PATH=$FCCSW/heppy/bin:$PATH >> $FCCSW/setup.sh
 echo export PYTHONPATH=$FCCSW/heppy/..:$PYTHONPATH >> $FCCSW/setup.sh
 
@@ -67,23 +67,23 @@ sudo mkdir -p $PYTHIA8DATA
 sudo cp share/Pythia8/xmldoc/* $PYTHIA8DATA
 
 cd $FCC/dag/build
-cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/ ..
+cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/dag/ ..
 make -j4 install
 
 cd $FCC/podio/build
-cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/ ..
+cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/podio/ ..
 make -j4 install
 
 cd $FCC/fcc-edm/build
-cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/ ..
+cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/fcc-edm/ ..
 make -j4 install
 
 cd $FCC/fcc-physics/build
-cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/ ..
+cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/fcc-physics/ ..
 make -j4 install
 
 
 # source /fccsw/setup.sh
 # wget https://raw.githubusercontent.com/HEP-FCC/heppy/master/test/analysis_ee_ZH_cfg.py
-# fcc-pythia8-generate /fccsw/share/ee_ZH_Zmumu_Hbb.txt
+# fcc-pythia8-generate /fccsw/fcc-physics/share/ee_ZH_Zmumu_Hbb.txt
 # heppy -i analysis_ee_ZH_cfg.py -e 0
