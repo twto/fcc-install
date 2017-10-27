@@ -27,9 +27,10 @@ git clone https://github.com/HEP-FCC/podio
 git clone https://github.com/HEP-FCC/dag
 git clone https://github.com/HEP-FCC/fcc-edm
 git clone https://github.com/HEP-FCC/fcc-physics
+git clone https://github.com/HEP-FCC/papas
 
 cd $FCC
-mkdir podio/build; mkdir fcc-edm/build; mkdir fcc-physics/build; mkdir dag/build
+mkdir podio/build; mkdir fcc-edm/build; mkdir fcc-physics/build; mkdir dag/build; mkdir papas/build;
 
 sudo git clone https://github.com/HEP-FCC/heppy.git $FCCSW/heppy/
 sudo cp $FCCSW/heppy/scripts/*.py $FCCSW/heppy/bin/
@@ -48,8 +49,10 @@ echo export PODIO=$FCCSW/podio/ >> $FCCSW/setup.sh
 echo export FCCPHYSICS=$FCCSW/fcc-physics/ >> $FCCSW/setup.sh
 echo export FCCDAG=$FCCSW/dag/ >> $FCCSW/setup.sh
 echo export HEPPY=$FCCSW/heppy/ >> $FCCSW/setup.sh
-echo export PATH=$FCCSW/heppy/bin:$PATH >> $FCCSW/setup.sh
+echo export FCCPAPASCPP=$FCCSW/papas/ >> $FCCSW/setup.sh
 echo export PYTHONPATH=$FCCSW/heppy/..:$PYTHONPATH >> $FCCSW/setup.sh
+echo export PATH=$FCCSW/heppy/bin:$FCCSW/papas/bin:$PATH >> $FCCSW/setup.sh
+echo export LD_LIBRARY_PATH=$FCCSW/papas/lib:$LD_LIBRARY_PATH >> $FCCSW/setup.sh
 
 echo source $FCCSW/root/bin/thisroot.sh >> $FCCSW/setup.sh
 echo source $FCCSW/init_fcc_stack.sh >> $FCCSW/setup.sh
@@ -82,6 +85,9 @@ cd $FCC/fcc-physics/build
 cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/fcc-physics/ ..
 make -j4 install
 
+cd $FCC/papas/build
+cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/papas/ ..
+make -j4 install
 
 # source /fccsw/setup.sh
 # wget https://raw.githubusercontent.com/HEP-FCC/heppy/master/test/analysis_ee_ZH_cfg.py
