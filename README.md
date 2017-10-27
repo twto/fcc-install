@@ -24,4 +24,5 @@ source /fccsw/setup.sh
 wget https://raw.githubusercontent.com/HEP-FCC/heppy/master/test/analysis_ee_ZH_cfg.py
 fcc-pythia8-generate /fccsw/fcc-physics/share/ee_ZH_Zmumu_Hbb.txt
 heppy -i analysis_ee_ZH_cfg.py -e 0
+example_simple ee_ZH_Zmumu_Hbb.root
 ```
