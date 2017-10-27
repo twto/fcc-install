@@ -16,6 +16,7 @@ tested with:
 * fcc-edm
 * fcc-physics
 * heppy
+* papas
 
 # example
 ```shell
