@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+sudo echo
+iss=$?
+if [[ "$iss" -ne 0 ]]; then
+  echo "This script must be run by sudo'er"
+  exit 1
+fi
+
 if sudo fuser /var/lib/dpkg/lock >/dev/null 2>&1 ; then echo "apt in use, exiting..."; exit; fi
 
 sudo apt-get update
@@ -22,7 +29,7 @@ sudo chown $USER:$USER $FCCSW
 
 cd $FCC
 wget https://root.cern.ch/download/root_v6.10.08.Linux-ubuntu16-x86_64-gcc5.4.tar.gz
-tar zxvf root_v6.10.08.Linux-ubuntu16-x86_64-gcc5.4.tar.gz -C $FCCSW && rm root_v6.10.08.Linux-ubuntu16-x86_64-gcc5.4.tar.gz
+tar zxf root_v6.10.08.Linux-ubuntu16-x86_64-gcc5.4.tar.gz -C $FCCSW && rm root_v6.10.08.Linux-ubuntu16-x86_64-gcc5.4.tar.gz
 
 cd $FCC
 git clone https://github.com/HEP-FCC/podio
@@ -40,11 +47,11 @@ sudo cp $FCCSW/heppy/scripts/heppy $FCCSW/heppy/bin/
 sudo chmod +x $FCCSW/heppy/bin/*.py
 sudo chmod +x $FCCSW/heppy/bin/heppy
 
-echo export PYTHIA8_DIR=/usr/lib/ >> $FCCSW/setup.sh
-echo export PYTHIA8DATA=/usr/share/pythia8-data/xmldoc/ >> $FCCSW/setup.sh
+echo export PYTHIA8_DIR=$FCCSW/pythia8 >> $FCCSW/setup.sh
+echo export PYTHIA8DATA=$FCCSW/pythia8/data/ >> $FCCSW/setup.sh
 echo export HEPMC_PREFIX=/usr/lib/ >> $FCCSW/setup.sh
-echo export PYTHIA8_INCLUDE_DIR=/usr/include/Pythia8 >> $FCCSW/setup.sh
-echo export PYTHIA8_LIBRARY=/usr/lib/x86_64-linux-gnu >> $FCCSW/setup.sh
+echo export PYTHIA8_INCLUDE_DIR=$FCCSW/pythia8 >> $FCCSW/setup.sh
+echo export PYTHIA8_LIBRARY=$FCCSW/pythia/lib/ >> $FCCSW/setup.sh
 
 echo export FCCEDM=$FCCSW/fcc-edm/ >> $FCCSW/setup.sh
 echo export PODIO=$FCCSW/podio/ >> $FCCSW/setup.sh
@@ -62,14 +69,22 @@ echo source $FCCSW/init_fcc_stack.sh >> $FCCSW/setup.sh
 curl https://raw.githubusercontent.com/HEP-FCC/fcc-spi/master/init_fcc_stack.sh -o $FCCSW/init_fcc_stack.sh
 source $FCCSW/setup.sh
 
+#cd $FCC
+#wget http://hepmc.web.cern.ch/hepmc/releases/hepmc3.0.0.tgz
+#tar zxf hepmc3.0.0.tgz && rm hepmc3.0.0.tgz
+#cd hepmc3.0.0
+#mkdir build; cd build
+#cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/hepmc/ ..
+#sudo make install
+
 cd $FCC
 wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8230.tgz
-tar zxvf pythia8230.tgz && rm pythia8230.tgz
+tar zxf pythia8230.tgz && rm pythia8230.tgz
 cd pythia8230
 ./configure --prefix=$PYTHIA8_DIR --with-hepmc2=$HEPMC_PREFIX --enable-shared
-sudo make -j 4 install
-sudo mkdir -p $PYTHIA8DATA
-sudo cp share/Pythia8/xmldoc/* $PYTHIA8DATA
+make -j 4 install
+mkdir -p $PYTHIA8DATA
+cp share/Pythia8/xmldoc/* $PYTHIA8DATA
 
 cd $FCC/dag/build
 cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/dag/ ..
@@ -95,3 +110,4 @@ make -j4 install
 # wget https://raw.githubusercontent.com/HEP-FCC/heppy/master/test/analysis_ee_ZH_cfg.py
 # fcc-pythia8-generate /fccsw/fcc-physics/share/ee_ZH_Zmumu_Hbb.txt
 # heppy -i analysis_ee_ZH_cfg.py -e 0
+# example_simple ee_ZH_Zmumu_Hbb.root
