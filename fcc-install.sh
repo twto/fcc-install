@@ -42,10 +42,10 @@ cd $FCC
 mkdir podio/build; mkdir fcc-edm/build; mkdir fcc-physics/build; mkdir dag/build; mkdir papas/build;
 
 sudo git clone https://github.com/HEP-FCC/heppy.git $FCCSW/heppy/
-sudo cp $FCCSW/heppy/scripts/*.py $FCCSW/heppy/bin/
-sudo cp $FCCSW/heppy/scripts/heppy $FCCSW/heppy/bin/
-sudo chmod +x $FCCSW/heppy/bin/*.py
-sudo chmod +x $FCCSW/heppy/bin/heppy
+#sudo cp $FCCSW/heppy/scripts/*.py $FCCSW/heppy/bin/
+#sudo cp $FCCSW/heppy/scripts/heppy $FCCSW/heppy/bin/
+#sudo chmod +x $FCCSW/heppy/bin/*.py
+#sudo chmod +x $FCCSW/heppy/bin/heppy
 
 echo export PYTHIA8_DIR=$FCCSW/pythia8 >> $FCCSW/setup.sh
 echo export PYTHIA8DATA=$FCCSW/pythia8/data/ >> $FCCSW/setup.sh
