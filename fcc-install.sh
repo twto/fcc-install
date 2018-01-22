@@ -90,14 +90,10 @@ cd $FCC/dag/build
 cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/dag/ ..
 make -j4 install
 
-cd $FCC/podio
-git reset --hard 6cf20dbb49447b233eab9375586dce073c82643a
 cd $FCC/podio/build
 cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/podio/ ..
 make -j4 install
 
-cd $FCC/fcc-edm
-git reset --hard 22b5abc154b5d6db7adfcb2336c89a16e37a2b89
 cd $FCC/fcc-edm/build
 cmake -DCMAKE_INSTALL_PREFIX=$FCCSW/fcc-edm/ ..
 make -j4 install
