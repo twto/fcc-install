@@ -10,7 +10,7 @@ fi
 if sudo fuser /var/lib/dpkg/lock >/dev/null 2>&1 ; then echo "apt in use, exiting..."; exit; fi
 
 sudo apt-get update
-sudo apt-get -y install castxml gfortran g++ curl cmake git python python-dev ipython
+sudo apt-get -y install castxml gfortran g++ curl cmake git python python-dev ipython doxygen
 sudo apt-get -y install libhepmc-dev libfastjet-dev libfastjettools-dev libsiscone-dev libsiscone-spherical-dev libfastjetplugins-dev
 sudo apt-get -y install libopenblas-base libopenblas-dev
 
