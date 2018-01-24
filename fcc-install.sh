@@ -19,6 +19,7 @@ sudo -H pip install pyyaml
 sudo -H pip install numpy
 sudo -H pip install scipy
 sudo -H pip install dill
+sudo -H pip install gitpython
 
 mkdir FCC
 export FCC=${PWD}/FCC
