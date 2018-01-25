@@ -29,8 +29,9 @@ sudo mkdir -p $FCCSW
 sudo chown $USER:$USER $FCCSW
 
 cd $FCC
-wget https://root.cern.ch/download/root_v6.10.08.Linux-ubuntu16-x86_64-gcc5.4.tar.gz
-tar zxf root_v6.10.08.Linux-ubuntu16-x86_64-gcc5.4.tar.gz -C $FCCSW && rm root_v6.10.08.Linux-ubuntu16-x86_64-gcc5.4.tar.gz
+
+wget https://root.cern.ch/download/root_v6.12.04.Linux-ubuntu16-x86_64-gcc5.4.tar.gz
+tar zxf root_v6.12.04.Linux-ubuntu16-x86_64-gcc5.4.tar.gz -C $FCCSW && rm root_v6.12.04.Linux-ubuntu16-x86_64-gcc5.4.tar.gz
 
 cd $FCC
 git clone https://github.com/HEP-FCC/podio

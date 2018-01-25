@@ -9,7 +9,7 @@ tested with:
 * linuxmint-18.2-cinnamon-64bit
 
 # sw
-* root 6.10.08
+* root 6.12.04
 * pythia 8.230
 * podio
 * dag
