@@ -43,7 +43,8 @@ git clone https://github.com/HEP-FCC/papas
 cd $FCC
 mkdir podio/build; mkdir fcc-edm/build; mkdir fcc-physics/build; mkdir dag/build; mkdir papas/build;
 
-sudo git clone https://github.com/HEP-FCC/heppy.git $FCCSW/heppy/
+git clone https://github.com/HEP-FCC/heppy.git $FCCSW/heppy/
+
 #sudo cp $FCCSW/heppy/scripts/*.py $FCCSW/heppy/bin/
 #sudo cp $FCCSW/heppy/scripts/heppy $FCCSW/heppy/bin/
 #sudo chmod +x $FCCSW/heppy/bin/*.py
