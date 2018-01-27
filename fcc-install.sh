@@ -15,13 +15,9 @@ sudo apt-get -y install libhepmc-dev libfastjet-dev libfastjettools-dev libsisco
 sudo apt-get -y install libopenblas-base libopenblas-dev
 
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && sudo -H python get-pip.py && rm get-pip.py
-sudo -H pip install pyyaml
-sudo -H pip install numpy
-sudo -H pip install scipy
-sudo -H pip install dill
-sudo -H pip install gitpython
+sudo -H pip install --upgrade pyyaml numpy scipy dill gitpython
 
-mkdir FCC
+mkdir -p FCC
 export FCC=${PWD}/FCC
 
 export FCCSW=/fccsw
